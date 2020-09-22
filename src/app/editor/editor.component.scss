@@ -1,0 +1,60 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr minmax(250px, 25%);
+  grid-gap: 64px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin-top: 16px;
+  }
+}
+
+h3 {
+  font-weight: 500;
+}
+
+.mat-divider[role="separator"] {
+  position: static;
+  margin: 16px -16px;
+  width: calc(100% + 32px);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr;
+  grid-gap: 40px 16px;
+
+  pre {
+    margin: 0;
+    white-space: pre-line;
+  }
+}
+
+
+form .mat-card-content {
+  overflow: auto;
+  margin: -16px -16px 0;
+  padding: 16px;
+  max-height: 70vh;
+}
+
+form .mat-form-field {
+  width: 100%;
+}
+
+form .mat-divider:last-of-type {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+pre {
+  border-radius: 4px;
+  background-color: #3e3e3e;
+  color: #fafafa;
+  padding: 8px;
+  font-size: 0.9em;
+}

@@ -1,0 +1,109 @@
+<main>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-title>Demo form</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="form-grid">
+          <mat-form-field>
+            <input matInput formControlName="firstName" required>
+            <mat-label>First name</mat-label>
+            <mat-error *ngxIfErrors="let errs of 'firstName'">{{ errs | errorMessage }}</mat-error>
+          </mat-form-field>
+          <div>
+          <pre>// Control State
+            {{ firstNameState$ | async | jsonPropList }}</pre>
+          </div>
+          <div>
+            <pre>// Control Errors
+              {{ formGroup.controls.firstName.errors | jsonPropList }}</pre>
+          </div>
+          <mat-form-field>
+            <input matInput formControlName="lastName" required>
+            <mat-label>Last name</mat-label>
+            <mat-error *ngxIfErrors="let errs of 'lastName'">{{ errs | errorMessage }}</mat-error>
+          </mat-form-field>
+          <div>
+          <pre>// Control State
+            {{ lastNameState$ | async | jsonPropList }}</pre>
+          </div>
+          <div>
+            <pre>// Control Errors
+              {{ formGroup.controls.lastName.errors | jsonPropList }}</pre>
+          </div>
+          <mat-form-field>
+            <input matInput formControlName="email" type="email">
+            <mat-label>Email</mat-label>
+            <mat-error *ngxIfErrors="let errs of 'email'">{{ errs | errorMessage }}</mat-error>
+            <mat-hint>This field is not required. But if a value is present, it must be a valid email address.</mat-hint>
+          </mat-form-field>
+          <div>
+          <pre>// Control State
+            {{ emailState$ | async | jsonPropList }}</pre>
+          </div>
+          <div>
+            <pre>// Control Errors
+              {{ formGroup.controls.email.errors | jsonPropList }}</pre>
+          </div>
+          <mat-form-field>
+            <input matInput formControlName="city">
+            <mat-label>City</mat-label>
+            <mat-error *ngxIfErrors="let errs of 'city'">{{ errs | errorMessage }}</mat-error>
+            <mat-hint>This field has no validators and is always disabled.
+              Note that <code>valid</code> is <code>false</code>!</mat-hint>
+          </mat-form-field>
+          <div>
+          <pre>// Control State
+            {{ cityState$ | async | jsonPropList }}</pre>
+          </div>
+          <div>
+            <pre>// Control Errors
+              {{ formGroup.controls.city.errors | jsonPropList }}</pre>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <button mat-button
+                [disabled]="!options.useFormSubmitted && formGroup.invalid"
+        >SUBMIT
+        </button>
+        <button mat-button (click)="formGroup.reset()">RESET</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</main>
+<aside>
+  <mat-card>
+    <mat-card-content>
+      <h3>Options</h3>
+      <div class="options">
+        <mat-slide-toggle [(ngModel)]="options.useControlDirty">use control dirty</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useControlTouched">use control touched</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useFormDirty">use form dirty</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useFormTouched">use form touched</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useFormSubmitted">use form submitted</mat-slide-toggle>
+        <mat-slide-toggle [ngModel]="options.immediate" disabled>show immediately</mat-slide-toggle>
+        <p>
+          <small class="mat-hint">A <code>control</code> is a single input. "A control is marked
+            <a href="https://angular.io/api/forms/AbstractControl#touched" target="_blank">
+              <code>touched</code>
+            </a> once the user has triggered a blur event on it.
+
+            A control is <a href="https://angular.io/api/forms/AbstractControl#dirty"
+                            target="_blank"><code>dirty</code> </a>
+            if the user has changed the value in the UI." The same holds true for the form, whenever at least one of its
+            controls matches these states.
+
+          </small>
+        </p>
+      </div>
+      <mat-divider></mat-divider>
+      <h3>Form State</h3>
+      <pre>{{ formState$ | async | jsonPropList }}</pre>
+      <mat-divider></mat-divider>
+      <h3>Form Value</h3>
+      <pre>{{ formGroup.value | jsonPropList }}</pre>
+    </mat-card-content>
+  </mat-card>
+</aside>
