@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-material-error-state-matching": {
+    "angular-form-states-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-material-error-state-matching",
+            "outputPath": "dist/angular-form-states-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-material-error-state-matching:build"
+            "browserTarget": "angular-form-states-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-material-error-state-matching:build:production"
+              "browserTarget": "angular-form-states-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-material-error-state-matching:build"
+            "browserTarget": "angular-form-states-demo:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-material-error-state-matching:serve"
+            "devServerTarget": "angular-form-states-demo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-material-error-state-matching:serve:production"
+              "devServerTarget": "angular-form-states-demo:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "angular-material-error-state-matching"
+  "defaultProject": "angular-form-states-demo"
 }
