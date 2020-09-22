@@ -11,11 +11,11 @@ export class AppComponent {
   options = this.createOptions();
   private createOptions(): ErrorStateMatcherOptions {
     return {
-      useControlDirty: true,
-      useControlTouched: false,
+      useControlDirty: false,
+      useControlTouched: true,
       useFormDirty: false,
       useFormTouched: false,
-      useFormSubmitted: false,
+      useFormSubmitted: true,
       immediate: false
     };
   }
