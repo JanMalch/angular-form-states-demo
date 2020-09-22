@@ -78,11 +78,12 @@
     <mat-card-content>
       <h3>Options</h3>
       <div class="options">
-        <mat-slide-toggle [(ngModel)]="options.useControlDirty">use control dirty</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useControlTouched">use control touched</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useFormDirty">use form dirty</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useFormTouched">use form touched</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useFormSubmitted">use form submitted</mat-slide-toggle>
+        <span>Show an error if the value is invalid, and ...</span><br/>
+        <mat-slide-toggle [(ngModel)]="options.useControlTouched">control is touched, or ...</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useControlDirty">control is dirty, or ...</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useFormTouched">form is touched, or ...</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useFormDirty">form is dirty, or ...</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.useFormSubmitted">form is submitted, or ...</mat-slide-toggle>
         <mat-slide-toggle [ngModel]="options.immediate" disabled>show immediately</mat-slide-toggle>
         <p>
           <small class="mat-hint">A <code>control</code> is a single input. "A control is marked

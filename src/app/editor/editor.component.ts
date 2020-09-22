@@ -2,7 +2,7 @@ import {Component, DoCheck, Injectable, Input, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Observable} from 'rxjs';
+import {merge, Observable, Subject} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ErrorStateMatcherOptions} from '../models';
 
@@ -20,11 +20,11 @@ class DynamicErrorStateMatcher implements ErrorStateMatcher {
     if (this.options == null || this.options.immediate) {
       return control.invalid;
     }
-    return (control.dirty || !this.options.useControlDirty) &&
-      (control.touched || !this.options.useControlTouched) &&
-      (form.dirty || !this.options.useFormDirty) &&
-      (form.touched || !this.options.useFormTouched) &&
-      (form.submitted || !this.options.useFormSubmitted);
+    return (control.dirty && this.options.useControlDirty) ||
+      (control.touched && this.options.useControlTouched) ||
+      (form.dirty && this.options.useFormDirty) ||
+      (form.touched && this.options.useFormTouched) ||
+      (form.submitted && this.options.useFormSubmitted);
   }
 }
 
@@ -47,6 +47,8 @@ export class EditorComponent implements OnInit, DoCheck {
   lastNameState$: Observable<Record<string, any>>;
   emailState$: Observable<Record<string, any>>;
   cityState$: Observable<Record<string, any>>;
+
+  private doCheck$ = new Subject();
 
   constructor(private fb: FormBuilder,
               private desm: DynamicErrorStateMatcher,
@@ -82,6 +84,7 @@ export class EditorComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
+    this.doCheck$.next();
     // simple/dirty solution with DoCheck for the demo
     this.adjustImmediateSwitch();
     this.refreshErrorState();
@@ -97,7 +100,7 @@ export class EditorComponent implements OnInit, DoCheck {
   }
 
   private observeStateOf(control: AbstractControl): Observable<Record<string, any>> {
-    return control.valueChanges.pipe(
+    return merge(this.doCheck$, control.valueChanges, control.statusChanges).pipe(
       startWith(undefined),
       map(() => {
         return {
