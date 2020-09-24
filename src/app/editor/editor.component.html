@@ -46,6 +46,23 @@
               {{ formGroup.controls.email.errors | jsonPropList }}</pre>
           </div>
           <mat-form-field>
+            <input matInput formControlName="country">
+            <mat-label>Country</mat-label>
+            <mat-error *ngxIfErrors="let errs of 'country'">{{ errs | errorMessage }}</mat-error>
+            <mat-hint>If a value is present it has minimum length of 3,
+              but the control only <a href="https://angular.io/api/forms/AbstractControlOptions#updateOn" target="_blank" rel="noopener">
+                updates on <code>"blur"</code></a>.
+            </mat-hint>
+          </mat-form-field>
+          <div>
+          <pre>// Control State
+            {{ countryState$ | async | jsonPropList }}</pre>
+          </div>
+          <div>
+            <pre>// Control Errors
+              {{ formGroup.controls.country.errors | jsonPropList }}</pre>
+          </div>
+          <mat-form-field>
             <input matInput formControlName="city">
             <mat-label>City</mat-label>
             <mat-error *ngxIfErrors="let errs of 'city'">{{ errs | errorMessage }}</mat-error>

@@ -47,6 +47,7 @@ export class EditorComponent implements OnInit, DoCheck {
   lastNameState$: Observable<Record<string, any>>;
   emailState$: Observable<Record<string, any>>;
   cityState$: Observable<Record<string, any>>;
+  countryState$: Observable<Record<string, any>>;
 
   private doCheck$ = new Subject();
 
@@ -62,6 +63,7 @@ export class EditorComponent implements OnInit, DoCheck {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.email]],
+      country: ['', { validators: [Validators.minLength(3)], updateOn: 'blur' }],
       city: this.fb.control({value: 'Angular city', disabled: true})
     });
 
@@ -81,6 +83,7 @@ export class EditorComponent implements OnInit, DoCheck {
     this.lastNameState$ = this.observeStateOf(this.formGroup.controls.lastName);
     this.emailState$ = this.observeStateOf(this.formGroup.controls.email);
     this.cityState$ = this.observeStateOf(this.formGroup.controls.city);
+    this.countryState$ = this.observeStateOf(this.formGroup.controls.country);
   }
 
   ngDoCheck(): void {
