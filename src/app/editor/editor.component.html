@@ -6,84 +6,128 @@
       <mat-card-content>
         <div class="form-grid">
           <mat-form-field>
-            <input matInput formControlName="firstName" required>
+            <input matInput formControlName="firstName" required />
             <mat-label>First name</mat-label>
-            <mat-error *ngxIfErrors="let errs of 'firstName'">{{ errs | errorMessage }}</mat-error>
+            <mat-error *ngxIfErrors="let errs of 'firstName'">{{
+              errs | errorMessage
+            }}</mat-error>
           </mat-form-field>
           <div>
-          <pre>// Control State
-            {{ firstNameState$ | async | jsonPropList }}</pre>
+            <pre>
+// Control State
+            {{ firstNameState$ | async | jsonPropList }}</pre
+            >
           </div>
           <div>
-            <pre>// Control Errors
-              {{ formGroup.controls.firstName.errors | jsonPropList }}</pre>
+            <pre>
+// Control Errors
+              {{ formGroup.controls.firstName.errors | jsonPropList }}</pre
+            >
           </div>
           <mat-form-field>
-            <input matInput formControlName="lastName" required>
+            <input matInput formControlName="lastName" required />
             <mat-label>Last name</mat-label>
-            <mat-error *ngxIfErrors="let errs of 'lastName'">{{ errs | errorMessage }}</mat-error>
+            <mat-error *ngxIfErrors="let errs of 'lastName'">{{
+              errs | errorMessage
+            }}</mat-error>
           </mat-form-field>
           <div>
-          <pre>// Control State
-            {{ lastNameState$ | async | jsonPropList }}</pre>
+            <pre>
+// Control State
+            {{ lastNameState$ | async | jsonPropList }}</pre
+            >
           </div>
           <div>
-            <pre>// Control Errors
-              {{ formGroup.controls.lastName.errors | jsonPropList }}</pre>
+            <pre>
+// Control Errors
+              {{ formGroup.controls.lastName.errors | jsonPropList }}</pre
+            >
           </div>
           <mat-form-field>
-            <input matInput formControlName="email" type="email">
+            <input matInput formControlName="email" type="email" />
             <mat-label>Email</mat-label>
-            <mat-error *ngxIfErrors="let errs of 'email'">{{ errs | errorMessage }}</mat-error>
-            <mat-hint>This field is not required. But if a value is present, it must be a valid email address.</mat-hint>
+            <mat-error *ngxIfErrors="let errs of 'email'">{{
+              errs | errorMessage
+            }}</mat-error>
+            <mat-hint
+              >This field is not required. But if a value is present, it must be
+              a valid email address.</mat-hint
+            >
           </mat-form-field>
           <div>
-          <pre>// Control State
-            {{ emailState$ | async | jsonPropList }}</pre>
+            <pre>
+// Control State
+            {{ emailState$ | async | jsonPropList }}</pre
+            >
           </div>
           <div>
-            <pre>// Control Errors
-              {{ formGroup.controls.email.errors | jsonPropList }}</pre>
+            <pre>
+// Control Errors
+              {{ formGroup.controls.email.errors | jsonPropList }}</pre
+            >
           </div>
           <mat-form-field>
-            <input matInput formControlName="country">
+            <input matInput formControlName="country" />
             <mat-label>Country</mat-label>
-            <mat-error *ngxIfErrors="let errs of 'country'">{{ errs | errorMessage }}</mat-error>
-            <mat-hint>If a value is present it has minimum length of 3,
-              but the control only <a href="https://angular.io/api/forms/AbstractControlOptions#updateOn" target="_blank" rel="noopener">
-                updates on <code>"blur"</code></a>.
+            <mat-error *ngxIfErrors="let errs of 'country'">{{
+              errs | errorMessage
+            }}</mat-error>
+            <mat-hint
+              >If a value is present it has minimum length of 3, but the control
+              only
+              <a
+                href="https://angular.io/api/forms/AbstractControlOptions#updateOn"
+                target="_blank"
+                rel="noopener"
+              >
+                updates on <code>"blur"</code></a
+              >.
             </mat-hint>
           </mat-form-field>
           <div>
-          <pre>// Control State
-            {{ countryState$ | async | jsonPropList }}</pre>
+            <pre>
+// Control State
+            {{ countryState$ | async | jsonPropList }}</pre
+            >
           </div>
           <div>
-            <pre>// Control Errors
-              {{ formGroup.controls.country.errors | jsonPropList }}</pre>
+            <pre>
+// Control Errors
+              {{ formGroup.controls.country.errors | jsonPropList }}</pre
+            >
           </div>
           <mat-form-field>
-            <input matInput formControlName="city">
+            <input matInput formControlName="city" />
             <mat-label>City</mat-label>
-            <mat-error *ngxIfErrors="let errs of 'city'">{{ errs | errorMessage }}</mat-error>
-            <mat-hint>This field has no validators and is always disabled.
-              Note that <code>valid</code> is <code>false</code>!</mat-hint>
+            <mat-error *ngxIfErrors="let errs of 'city'">{{
+              errs | errorMessage
+            }}</mat-error>
+            <mat-hint
+              >This field has no validators and is always disabled. Note that
+              <code>valid</code> is <code>false</code>!</mat-hint
+            >
           </mat-form-field>
           <div>
-          <pre>// Control State
-            {{ cityState$ | async | jsonPropList }}</pre>
+            <pre>
+// Control State
+            {{ cityState$ | async | jsonPropList }}</pre
+            >
           </div>
           <div>
-            <pre>// Control Errors
-              {{ formGroup.controls.city.errors | jsonPropList }}</pre>
+            <pre>
+// Control Errors
+              {{ formGroup.controls.city.errors | jsonPropList }}</pre
+            >
           </div>
         </div>
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions>
-        <button mat-button
-                [disabled]="!options.useFormSubmitted && formGroup.invalid"
-        >SUBMIT
+        <button
+          mat-button
+          [disabled]="!options.useFormSubmitted && formGroup.invalid"
+        >
+          SUBMIT
         </button>
         <button mat-button (click)="formGroup.reset()">RESET</button>
       </mat-card-actions>
@@ -95,24 +139,43 @@
     <mat-card-content>
       <h3>Options</h3>
       <div class="options">
-        <span>Show an error if the value is invalid, and ...</span><br/>
-        <mat-slide-toggle [(ngModel)]="options.useControlTouched">control is touched, or ...</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useControlDirty">control is dirty, or ...</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useFormTouched">form is touched, or ...</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useFormDirty">form is dirty, or ...</mat-slide-toggle>
-        <mat-slide-toggle [(ngModel)]="options.useFormSubmitted">form is submitted, or ...</mat-slide-toggle>
-        <mat-slide-toggle [ngModel]="options.immediate" disabled>show immediately</mat-slide-toggle>
+        <span>Show an error if the value is invalid, and ...</span><br />
+        <mat-slide-toggle [(ngModel)]="options.useControlTouched"
+          >control is touched, or ...</mat-slide-toggle
+        >
+        <mat-slide-toggle [(ngModel)]="options.useControlDirty"
+          >control is dirty, or ...</mat-slide-toggle
+        >
+        <mat-slide-toggle [(ngModel)]="options.useFormTouched"
+          >form is touched, or ...</mat-slide-toggle
+        >
+        <mat-slide-toggle [(ngModel)]="options.useFormDirty"
+          >form is dirty, or ...</mat-slide-toggle
+        >
+        <mat-slide-toggle [(ngModel)]="options.useFormSubmitted"
+          >form is submitted, or ...</mat-slide-toggle
+        >
+        <mat-slide-toggle [ngModel]="options.immediate" disabled
+          >show immediately</mat-slide-toggle
+        >
         <p>
-          <small class="mat-hint">A <code>control</code> is a single input. "A control is marked
-            <a href="https://angular.io/api/forms/AbstractControl#touched" target="_blank">
+          <small class="mat-hint"
+            >A <code>control</code> is a single input. "A control is marked
+            <a
+              href="https://angular.io/api/forms/AbstractControl#touched"
+              target="_blank"
+            >
               <code>touched</code>
-            </a> once the user has triggered a blur event on it.
-
-            A control is <a href="https://angular.io/api/forms/AbstractControl#dirty"
-                            target="_blank"><code>dirty</code> </a>
-            if the user has changed the value in the UI." The same holds true for the form, whenever at least one of its
-            controls matches these states.
-
+            </a>
+            once the user has triggered a blur event on it. A control is
+            <a
+              href="https://angular.io/api/forms/AbstractControl#dirty"
+              target="_blank"
+              ><code>dirty</code>
+            </a>
+            if the user has changed the value in the UI." The same holds true
+            for the form, whenever at least one of its controls matches these
+            states.
           </small>
         </p>
       </div>
@@ -127,8 +190,13 @@
   <p>
     <small class="mat-hint">
       Make sure to use an
-      <a href="https://material.angular.io/components/input/overview#changing-when-error-messages-are-shown"
-         target="_blank" rel="noopener"><code>ErrorStateMatcher</code></a> for @angular/material.
+      <a
+        href="https://material.angular.io/components/input/overview#changing-when-error-messages-are-shown"
+        target="_blank"
+        rel="noopener"
+        ><code>ErrorStateMatcher</code></a
+      >
+      for @angular/material.
     </small>
   </p>
 </aside>

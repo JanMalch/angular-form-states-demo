@@ -1,30 +1,44 @@
-import {Component, DoCheck, Injectable, Input, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {merge, Observable, Subject} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {ErrorStateMatcherOptions} from '../models';
+import { Component, DoCheck, Injectable, Input, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { merge, Observable, Subject } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { ErrorStateMatcherOptions } from '../models';
 
 @Injectable()
 class DynamicErrorStateMatcher implements ErrorStateMatcher {
   options: ErrorStateMatcherOptions | null = null;
 
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     if (control == null || form == null) {
       throw new Error('Control and form should not be null'); // just for demo
     }
-    if (!control.invalid) { // disabled controls are not valid, but are !invalid
+    if (!control.invalid) {
+      // disabled controls are not valid, but are !invalid
       return false;
     }
     if (this.options == null || this.options.immediate) {
       return control.invalid;
     }
-    return (control.dirty && this.options.useControlDirty) ||
+    return (
+      (control.dirty && this.options.useControlDirty) ||
       (control.touched && this.options.useControlTouched) ||
       (form.dirty && this.options.useFormDirty) ||
       (form.touched && this.options.useFormTouched) ||
-      (form.submitted && this.options.useFormSubmitted);
+      (form.submitted && this.options.useFormSubmitted)
+    );
   }
 }
 
@@ -34,11 +48,10 @@ class DynamicErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./editor.component.scss'],
   providers: [
     DynamicErrorStateMatcher,
-    {provide: ErrorStateMatcher, useExisting: DynamicErrorStateMatcher},
-  ]
+    { provide: ErrorStateMatcher, useExisting: DynamicErrorStateMatcher },
+  ],
 })
 export class EditorComponent implements OnInit, DoCheck {
-
   @Input() options: ErrorStateMatcherOptions;
 
   formGroup: FormGroup;
@@ -51,11 +64,11 @@ export class EditorComponent implements OnInit, DoCheck {
 
   private doCheck$ = new Subject();
 
-  constructor(private fb: FormBuilder,
-              private desm: DynamicErrorStateMatcher,
-              private snackBar: MatSnackBar
-  ) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    private desm: DynamicErrorStateMatcher,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.desm.options = this.options;
@@ -63,8 +76,11 @@ export class EditorComponent implements OnInit, DoCheck {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.email]],
-      country: ['', { validators: [Validators.minLength(3)], updateOn: 'blur' }],
-      city: this.fb.control({value: 'Angular city', disabled: true})
+      country: [
+        '',
+        { validators: [Validators.minLength(3)], updateOn: 'blur' },
+      ],
+      city: this.fb.control({ value: 'Angular city', disabled: true }),
     });
 
     this.formState$ = this.formGroup.valueChanges.pipe(
@@ -79,7 +95,9 @@ export class EditorComponent implements OnInit, DoCheck {
         };
       })
     );
-    this.firstNameState$ = this.observeStateOf(this.formGroup.controls.firstName);
+    this.firstNameState$ = this.observeStateOf(
+      this.formGroup.controls.firstName
+    );
     this.lastNameState$ = this.observeStateOf(this.formGroup.controls.lastName);
     this.emailState$ = this.observeStateOf(this.formGroup.controls.email);
     this.cityState$ = this.observeStateOf(this.formGroup.controls.city);
@@ -98,12 +116,18 @@ export class EditorComponent implements OnInit, DoCheck {
   }
 
   adjustImmediateSwitch(): void {
-    const { immediate, ...others} = this.options;
-    this.options.immediate = Object.values(others).every(x => x === false);
+    const { immediate, ...others } = this.options;
+    this.options.immediate = Object.values(others).every((x) => x === false);
   }
 
-  private observeStateOf(control: AbstractControl): Observable<Record<string, any>> {
-    return merge(this.doCheck$, control.valueChanges, control.statusChanges).pipe(
+  private observeStateOf(
+    control: AbstractControl
+  ): Observable<Record<string, any>> {
+    return merge(
+      this.doCheck$,
+      control.valueChanges,
+      control.statusChanges
+    ).pipe(
       startWith(undefined),
       map(() => {
         return {
@@ -119,9 +143,13 @@ export class EditorComponent implements OnInit, DoCheck {
 
   onSubmit(): void {
     if (this.formGroup.valid) {
-      this.snackBar.open(`✔️ If this was a real application, your form would've been submitted.`, null, {
-        duration: 5000,
-      });
+      this.snackBar.open(
+        `✔️ If this was a real application, your form would've been submitted.`,
+        null,
+        {
+          duration: 5000,
+        }
+      );
     }
   }
 }
