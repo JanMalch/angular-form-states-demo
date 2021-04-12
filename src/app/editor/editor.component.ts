@@ -135,7 +135,7 @@ export class EditorComponent implements OnInit, DoCheck {
           touched: control.touched,
           dirty: control.dirty,
           valid: control.valid,
-          invalid: this.formGroup.invalid,
+          invalid: control.invalid,
         };
       })
     );
