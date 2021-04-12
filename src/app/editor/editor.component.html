@@ -6,41 +6,41 @@
       <mat-card-content>
         <div class="form-grid">
           <mat-form-field>
-            <input matInput formControlName="firstName" required />
-            <mat-label>First name</mat-label>
-            <mat-error *ngxIfErrors="let errs of 'firstName'">{{
+            <input matInput formControlName="name" required />
+            <mat-label>Name</mat-label>
+            <mat-error *ngxIfErrors="let errs of 'name'">{{
               errs | errorMessage
             }}</mat-error>
           </mat-form-field>
           <div>
             <pre>
 // Control State
-            {{ firstNameState$ | async | jsonPropList }}</pre
+            {{ nameState$ | async | jsonPropList }}</pre
             >
           </div>
           <div>
             <pre>
 // Control Errors
-              {{ formGroup.controls.firstName.errors | jsonPropList }}</pre
+              {{ formGroup.controls.name.errors | jsonPropList }}</pre
             >
           </div>
           <mat-form-field>
-            <input matInput formControlName="lastName" required />
-            <mat-label>Last name</mat-label>
-            <mat-error *ngxIfErrors="let errs of 'lastName'">{{
+            <input matInput formControlName="age" required type="number" />
+            <mat-label>Age</mat-label>
+            <mat-error *ngxIfErrors="let errs of 'age'">{{
               errs | errorMessage
             }}</mat-error>
           </mat-form-field>
           <div>
             <pre>
 // Control State
-            {{ lastNameState$ | async | jsonPropList }}</pre
+            {{ ageState$ | async | jsonPropList }}</pre
             >
           </div>
           <div>
             <pre>
 // Control Errors
-              {{ formGroup.controls.lastName.errors | jsonPropList }}</pre
+              {{ formGroup.controls.age.errors | jsonPropList }}</pre
             >
           </div>
           <mat-form-field>

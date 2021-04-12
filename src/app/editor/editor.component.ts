@@ -56,8 +56,8 @@ export class EditorComponent implements OnInit, DoCheck {
 
   formGroup: FormGroup;
   formState$: Observable<Record<string, string | boolean>>;
-  firstNameState$: Observable<Record<string, any>>;
-  lastNameState$: Observable<Record<string, any>>;
+  nameState$: Observable<Record<string, any>>;
+  ageState$: Observable<Record<string, any>>;
   emailState$: Observable<Record<string, any>>;
   cityState$: Observable<Record<string, any>>;
   countryState$: Observable<Record<string, any>>;
@@ -73,8 +73,8 @@ export class EditorComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.desm.options = this.options;
     this.formGroup = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      age: [null, [Validators.required]],
       email: ['', [Validators.email]],
       country: [
         '',
@@ -95,10 +95,10 @@ export class EditorComponent implements OnInit, DoCheck {
         };
       })
     );
-    this.firstNameState$ = this.observeStateOf(
-      this.formGroup.controls.firstName
+    this.nameState$ = this.observeStateOf(
+      this.formGroup.controls.name
     );
-    this.lastNameState$ = this.observeStateOf(this.formGroup.controls.lastName);
+    this.ageState$ = this.observeStateOf(this.formGroup.controls.age);
     this.emailState$ = this.observeStateOf(this.formGroup.controls.email);
     this.cityState$ = this.observeStateOf(this.formGroup.controls.city);
     this.countryState$ = this.observeStateOf(this.formGroup.controls.country);
